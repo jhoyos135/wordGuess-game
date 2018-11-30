@@ -51,7 +51,10 @@
 
         
         //checks to see that the letter is already used
-        if(output.includes(userLetter)) {
+        if(output.includes(userLetter.toLowerCase())) {
+
+            //TODO: SHOW THE LETTERS ALREADY USED 
+            //TODO: SHOW A MESSAGE THAT SAYS "THE LETTER IS ALREADY ADDED"
             console.log("already here");
             output = ""
         } else {
@@ -63,6 +66,7 @@
 
     let guesses = document.querySelector("#guesses");
     let here = document.querySelector(".here");
+    let history = document.querySelector(".history");
 
     if(game.textContent.length === letters.length) {
 
@@ -73,6 +77,8 @@
         // document.querySelector("#submit").classList.add("delete");
         game.classList.add('delete');
         here.classList.add('delete');
+        history.classList.add('delete');
+
 
     } else if (attemptsLeft < 1 ) {
 
@@ -83,6 +89,7 @@
         // document.querySelector("#submit").classList.add("delete");
         game.classList.add('delete');
         here.classList.add('delete');
+        history.classList.add('delete');
 
     } else {
 
@@ -90,14 +97,23 @@
             You have ${attemptsLeft} guesses left
         `;
 
+
     }
 
     }
 
 window.onload = () => {
     setup();
-    window.addEventListener('keyup', (e) => {
+
+    window.addEventListener('keyup', (e) => {      
         e.preventDefault();
+
+        let input = document.querySelector("input").value;
+        let history = document.querySelector(".history");
+
+        history.innerHTML += `
+        <span> ${input} </span>
+        `;
 
         submit();
         
