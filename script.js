@@ -1,7 +1,7 @@
 
     let wordList = ["madona", "journey", "queen", "survivor"];
 
-    let choice = Math.floor(Math.random() *2);
+    let choice = Math.floor(Math.random() * 4);
     let answer = wordList[choice];
     let Mylength = answer.length;
     let display = [Mylength];
@@ -29,19 +29,22 @@
         input.value = "";
 
         for(let c = 0; c < answer.length; c++) {
+            
             if( userLetter.toLowerCase() === letters[c] ) {
+                
                 display[c] = userLetter.toLowerCase();
 
-                win--
-
-                console.log(output)
-                console.log(win)
-                console.log(letters)
-                console.log(letters[c])
+                // console.log(output)
+                // console.log(win)
+                // console.log(letters)
+                // console.log(letters[c])
+                
             }
 
             output = output + display[c] + "";
+            
         };
+        
 
         game.innerHTML = output;
 
@@ -61,9 +64,7 @@
     let guesses = document.querySelector("#guesses");
     let here = document.querySelector(".here");
 
-    // needs fixing -  when you add the same letter again the win counter goes down again
-
-    if(win < 1) {
+    if(game.textContent.length === letters.length) {
 
         guesses.innerHTML = `
             Congratulation! the right word is <strong class="strong">${answer} </strong>
