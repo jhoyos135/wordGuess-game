@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word Guess Game</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'/>
+    <link rel="stylesheet" href="style.css" />
+
 </head>
 <body>
 
-    <h1>Guess game</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
-    <div id="guesses"></div>
+            <h1 class="text-center mt-4">Guess game</h1>
 
-    <p>input a letter here to Guess</p>
+            <img src="images/2-WordGuess.jpg" alt="">
 
-    <div id="game"></div>
 
-    <input type="text">
-    <button id="submit" type="submit">Guess</button>
+
+    <div id="guesses" class="text-center">You have 10 guesses left</div>
+    <div id="game" class="text-center mb-4"></div>
+    <p class="text-center here">Input a letter here: </p>
+
+    <input type="text" maxlength="1" class="hidden">
+    <!-- <button id="submit" type="submit" class="btn btn-secondary d-block mt-4">Guess</button> -->
+
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     
