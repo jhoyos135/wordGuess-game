@@ -2,10 +2,10 @@
     let wordList = ["madona", "journey", "queen", "survivor"];
 
     let choice = Math.floor(Math.random() * 4);
-    let answer = wordList[choice];
-    let Mylength = answer.length;
+    let answers = wordList[choice];
+    let Mylength = answers.length;
     let display = [Mylength];
-    let letters = answer.split('');
+    let letters = answers.split('');
     let attemptsLeft = 10;
     let output = "";
     let userLetter = "";
@@ -15,10 +15,16 @@
 
     //this creates the game container
     let setup = () => {
-        for(let i = 0; i < answer.length; i++) {
-            display[i] = "_ ";
-            output = output + display[i];
-        }
+
+        [].forEach.call(answers, function(answers) {
+            display[answers] = "_ ";
+            output = output + display[answers]
+            console.log(answers)
+        })
+        // for(let i = 0; i < answers.length; i++) {
+        //     display[i] = "_ ";
+        //     output = output + display[i];
+        // }
         game.innerHTML = output;
         output = "";
     }
@@ -30,7 +36,7 @@
         userLetter = input.value;
         input.value = "";
 
-        for(let c = 0; c < answer.length; c++) {
+        for(let c = 0; c < answers.length; c++) {
             
             if( userLetter.toLowerCase() === letters[c] ) {
                 
@@ -67,7 +73,7 @@
     if(game.textContent.length === letters.length) {
 
         guesses.innerHTML = `
-            Congratulation! the right word is <strong class="strong">${answer} </strong>
+            Congratulation! the right word is <strong class="strong">${answers} </strong>
         `;
         input.classList.add("delete");
         game.classList.add('delete');
@@ -78,7 +84,7 @@
     } else if (attemptsLeft < 1 ) {
 
         guesses.innerHTML = `
-            Sorry the right word was <strong class="strong">${answer} </strong>
+            Sorry the right word was <strong class="strong">${answers} </strong>
         `;
         input.classList.add("delete");
         game.classList.add('delete');
