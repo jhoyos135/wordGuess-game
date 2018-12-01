@@ -5,13 +5,15 @@
     let answer = wordList[choice];
     let Mylength = answer.length;
     let display = [Mylength];
-    let win = Mylength;
     let letters = answer.split('');
     let attemptsLeft = 10;
     let output = "";
     let userLetter = "";
     let game = document.querySelector("#game");
 
+    //TODO: REFACTOR LOOPS
+
+    //this creates the game container
     let setup = () => {
         for(let i = 0; i < answer.length; i++) {
             display[i] = "_ ";
@@ -35,7 +37,6 @@
                 display[c] = userLetter.toLowerCase();
 
                 // console.log(output)
-                // console.log(win)
                 // console.log(letters)
                 // console.log(letters[c])
                 
@@ -45,10 +46,7 @@
             
         };
         
-
         game.innerHTML = output;
-
-
         
         //checks to see that the letter is already used
         if(output.includes(userLetter.toLowerCase())) {
@@ -60,9 +58,7 @@
         } else {
             output = ""
             attemptsLeft--;
-        }
-       
-        
+        }    
 
     let guesses = document.querySelector("#guesses");
     let here = document.querySelector(".here");
@@ -74,7 +70,6 @@
             Congratulation! the right word is <strong class="strong">${answer} </strong>
         `;
         input.classList.add("delete");
-        // document.querySelector("#submit").classList.add("delete");
         game.classList.add('delete');
         here.classList.add('delete');
         history.classList.add('delete');
@@ -86,7 +81,6 @@
             Sorry the right word was <strong class="strong">${answer} </strong>
         `;
         input.classList.add("delete");
-        // document.querySelector("#submit").classList.add("delete");
         game.classList.add('delete');
         here.classList.add('delete');
         history.classList.add('delete');
@@ -105,15 +99,19 @@
 window.onload = () => {
     setup();
 
-    window.addEventListener('keyup', (e) => {      
+    window.addEventListener('keyup', (e) => {   
+          
         e.preventDefault();
 
         let input = document.querySelector("input").value;
         let history = document.querySelector(".history");
 
-        history.innerHTML += `
-        <span> ${input} </span>
-        `;
+        if(!display.includes(input) ) {
+            history.innerHTML += `
+            <span> ${input} </span>
+            `;
+        }
+        
 
         submit();
         
