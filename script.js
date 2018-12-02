@@ -12,6 +12,7 @@
     let game = document.querySelector("#game");
 
     //TODO: REFACTOR LOOPS
+    //TODO: ADD RELOAD BUTTON
 
     //this creates the game container
     let setup = () => {
@@ -54,9 +55,9 @@
             //TODO: SHOW THE LETTERS ALREADY USED 
             //TODO: SHOW A MESSAGE THAT SAYS "THE LETTER IS ALREADY ADDED"
             
-            output = ""
+            output = "";
         } else {
-            output = ""
+            output = "";
             attemptsLeft--;
         }    
 
@@ -91,10 +92,9 @@
             You have ${attemptsLeft} guesses left
         `;
 
-
     }
 
-    }
+    };
 
 
 window.onload = () => {
@@ -112,35 +112,42 @@ window.onload = () => {
             <span> ${input} </span>
             `;
         }
-        
 
         submit();
-
 
         if(game.textContent === "queen") {
         
             let queen = document.querySelector('#queen');
     
             queen.style.display = "block";
-            queen.src = ('src', "https://www.youtube.com/embed/diy_J6o0qgQ?rel=0&autoplay=1");
+            queen.src = ('src', "https://www.youtube.com/embed/FFqvEE4ujtQ?t=27?rel=0&autoplay=1");
     
         }
         if(game.textContent === "journey") {
         
-            let queen = document.querySelector('#journey');
+            let journey = document.querySelector('#journey');
     
-            queen.style.display = "block";
-            // change video, "this one doesnt work"
-            queen.src = ('src', "https://www.youtube.com/embed/OMD8hBsA-RI?rel=0&autoplay=1");
+            journey.style.display = "block";
+            journey.src = ('src', "https://www.youtube.com/embed/VXi1sc8kFuU?rel=0&autoplay=1");
     
         }
-
-        //TODO: ADD THE OTHER ANSWER VIDEOS
-
+        if(game.textContent === "madona") {
+        
+            let madona = document.querySelector('#madona');
+    
+            madona.style.display = "block";
+            madona.src = ('src', "https://www.youtube.com/embed/6m9i3sYtONU?rel=0&autoplay=1");
+    
+        }
+        if(game.textContent === "survivor") {
+        
+            let survivor = document.querySelector('#survivor');
+    
+            survivor.style.display = "block";
+            survivor.src = ('src', "https://www.youtube.com/embed/t3oh7ktTABM?rel=0&autoplay=1");
+    
+        }
         
     });
 
-    
-
-
-}
+};
