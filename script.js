@@ -1,21 +1,22 @@
+let wordList = ["madona", "journey", "queen", "survivor"];
 
-    let wordList = ["madona", "journey", "queen", "survivor"];
+let choice = Math.floor(Math.random() * 4);
+let answer = wordList[choice];
+let Mylength = answer.length;
+let display = [Mylength];
+let letters = answer.split('');
+let attemptsLeft = 10;
+let output = "";
+let userLetter = "";
+let game = document.querySelector("#game");
+const btn_reload = document.querySelector('button');
 
-    let choice = Math.floor(Math.random() * 4);
-    let answer = wordList[choice];
-    let Mylength = answer.length;
-    let display = [Mylength];
-    let letters = answer.split('');
-    let attemptsLeft = 10;
-    let output = "";
-    let userLetter = "";
-    let game = document.querySelector("#game");
 
     //TODO: REFACTOR LOOPS
     //TODO: ADD RELOAD BUTTON
 
     //this creates the game container
-    let setup = () => {
+let setup = () => {
         for(let i = 0; i < answer.length; i++) {
             display[i] = "_ ";
             output = output + display[i];
@@ -24,7 +25,7 @@
         output = "";
     }
 
-    let submit = () => {
+let submit = () => {
         let input = document.querySelector("input");
 
         output = "";
@@ -32,19 +33,19 @@
         input.value = "";
 
         for(let c = 0; c < answer.length; c++) {
-            
+
             if( userLetter.toLowerCase() === letters[c] ) {
-                
+
                 display[c] = userLetter.toLowerCase();
 
                 // console.log(output)
                 // console.log(letters)
                 // console.log(letters[c])
-                
+
             }
 
             output = output + display[c] + "";
-            
+
         };
         
         game.innerHTML = output;
@@ -61,7 +62,6 @@
         }    
 
     let guesses = document.querySelector("#guesses");
-    let here = document.querySelector(".here");
     let history = document.querySelector(".history");
 
     if(game.textContent.length === letters.length) {
@@ -69,9 +69,7 @@
         guesses.innerHTML = `
             Congratulation! the right word is <strong class="strong">${answer} </strong>
         `;
-        input.classList.add("delete");
         game.classList.add('delete');
-        here.classList.add('delete');
         history.classList.add('delete');
 
 
@@ -80,9 +78,7 @@
         guesses.innerHTML = `
             Sorry the right word was <strong class="strong">${answer} </strong>
         `;
-        input.classList.add("delete");
         game.classList.add('delete');
-        here.classList.add('delete');
         history.classList.add('delete');
 
         
@@ -90,9 +86,9 @@
     
             game_over.style.display = "block";
             game_over.src = ("https://www.youtube.com/embed/6S21ZSsC21U?rel=0&autoplay=1&showinfo=0&iv_load_policy=3&controls=0");
-    
-        
+            btn_reload.style.display = 'block';
 
+    
     } else {
 
         guesses.innerHTML = `
@@ -100,7 +96,7 @@
         `;
 
     }
-    };
+};
 
 window.addEventListener('DOMContentLoaded', () => {
     
@@ -112,8 +108,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let input = document.querySelector("input").value;
         let history = document.querySelector(".history");
-
-        
 
         if(!display.includes(input) ) {
             history.innerHTML += `
@@ -130,6 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
             queen.style.display = "block";
             queen.src = ( "https://www.youtube.com/embed/FFqvEE4ujtQ?t=27?rel=0&autoplay=1&showinfo=0&controls=0");
+            btn_reload.style.display = 'block';
     
         }
         if(game.textContent === "journey") {
@@ -138,6 +133,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
             journey.style.display = "block";
             journey.src = ("https://www.youtube.com/embed/VXi1sc8kFuU?rel=0&autoplay=1&showinfo=0&controls=0");
+            btn_reload.style.display = 'block';
     
         }
         if(game.textContent === "madona") {
@@ -146,6 +142,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
             madona.style.display = "block";
             madona.src = ("https://www.youtube.com/embed/6m9i3sYtONU?rel=0&autoplay=1&showinfo=0&controls=0");
+            btn_reload.style.display = 'block';
     
         }
         if(game.textContent === "survivor") {
@@ -154,6 +151,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
             survivor.style.display = "block";
             survivor.src = ("https://www.youtube.com/embed/t3oh7ktTABM?rel=0&autoplay=1&showinfo=0&controls=0");
+            btn_reload.style.display = 'block';
     
         }
         
@@ -167,3 +165,7 @@ document.addEventListener('keydown', () => {
     let y = String.fromCharCode(x).toLowerCase();
     input.value = y  
 }); //get the key value into the input when the document is selected
+
+let reload = () => {
+    location.reload();
+}

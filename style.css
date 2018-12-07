@@ -21,6 +21,7 @@ background-repeat: no-repeat;
 border: 1px solid white;
 box-shadow: 1px 1px 8px rgba(0,0,0,0.5);
 transform: rotate(-15deg);
+clip-path: polygon(100% 0, 100% 50%, 50% 100%, 0 100%, 0 0);
 }
 
 .center {
@@ -28,8 +29,9 @@ margin: 0 auto;
 }
 
 button {
-width: 80%;
-margin: 0 auto;
+display: none;
+margin: 25px auto;
+cursor: pointer;
 }
 input {
 display: flex;
