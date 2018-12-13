@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word Guess Game</title>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'/>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
 </head>
 <body id="body" type="text">
@@ -15,8 +15,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
             </br>
-            <img src="images/2-WordGuess.jpg" alt="">
-
+                <img src="images/2-WordGuess.jpg" alt="">
 
 
     <div id="guesses" class="text-center">You have 10 guesses left</div>
@@ -26,7 +25,8 @@
     <div class="text-center mt-4 mb-1 history">
         <h2>History:</h2>
     </div>
-    <button onclick="reload()">Reload Game</button>
+    <div class="wins"></div>
+    <button  onclick="reload()">Reload Game</button>
 
     <div class="video-containers">
         <iframe id="queen" src="" frameborder="0" ></iframe>
@@ -35,11 +35,14 @@
         <iframe id="survivor" src="" frameborder="0" ></iframe>
         <iframe id="game-over" src="" frameborder="0" ></iframe>
     </div>
-            </div>
-        </div>
-    </div>
+            </div> <!--Col-->
+        </div> <!--Row-->
+    </div> <!--Container-->
+    <footer>
+        <h4 class="text-center">Press any key to get started!</h4>
+    </footer>
 
-    <script src="script.js"></script>
-    
+
+<script src="javascript/game.js"></script>  
 </body>
 </html>
