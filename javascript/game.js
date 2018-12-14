@@ -16,6 +16,7 @@ const btn_reload = document.querySelector('button');
 let input = document.querySelector("input");
 let h4 = document.querySelector('h4');
 var scores = 0;
+
 //this creates the game container
 let setup = () => {
 
@@ -73,14 +74,14 @@ let submit = () => {
         btn_reload.style.display = 'block';
 
         // saves and prints the score of evey game played
+        // plays the audio
         if(game.textContent === output) {
             audio();
             scores++
             localStorage.player_score = JSON.stringify(scores);
             
             let win = document.querySelector('.wins');
-
-            win.textContent = ` score: ${scores} `
+            win.textContent = ` Your score is: ${scores} `
 
         };
 
@@ -104,9 +105,19 @@ let submit = () => {
             
             
     } else {
+        let count_box = `
+        color: red;
+        border: 1px solid white;
+        display: inline-block;
+        text-shadow: 0px 0px 5px #999;
+        padding: 0 10px;
+        background: #444;
+        box-sizing: border-box;
+        box-shadow: 1px 1px 5px red;
+        `
 
         guesses.innerHTML = `
-            You have ${attemptsLeft} guesses left
+            You have <strong style="${count_box}""> ${attemptsLeft} </strong> guesses left
         `;
     }
 };
@@ -118,7 +129,7 @@ let audio = () => {
         let queen = document.querySelector('#queen');
 
         queen.style.display = "block";
-        queen.src = ( "https://www.youtube.com/embed/oY3-LUR1OTA?rel=0&autoplay=1&showinfo=0&controls=0");
+        queen.src = ( "https://www.youtube.com/embed/1P2tT61hLLM?rel=0&autoplay=1&showinfo=0&controls=0");
 
     }
     if(game.textContent === "journey") {
@@ -147,8 +158,7 @@ let audio = () => {
     }
 }
 
-window.addEventListener('DOMContentLoaded', (e) => {
-    e.preventDefault();
+window.addEventListener('DOMContentLoaded', () => {
     
     setup();
    
@@ -157,28 +167,26 @@ window.addEventListener('DOMContentLoaded', (e) => {
         
 
         let input = document.querySelector('input');
-        let x = event.charCode || event.keyCode;
+        let x = e.charCode || e.keyCode;
         let y = String.fromCharCode(x).toLowerCase();
         input.value = y  
     
 
         let history = document.querySelector(".history");
     
-        if(!display.includes(y) && e.which !== 8  ) {
+        if(!display.includes(y) && e.which !== 8 && e.which !== 13  ) {
             history.innerHTML += `
             <span> ${y} </span>
             `;
             submit();
 
         }
-
-            
-        
-        
+    
     }); 
 
 //saves the score to the local storage
 if( localStorage["player_score"] !== undefined ){ 
+
     scores = JSON.parse(localStorage["player_score"]);
 
 }

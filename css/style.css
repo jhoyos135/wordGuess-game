@@ -73,7 +73,7 @@ border: 1px solid #fff;
 #survivor {
     display: none;
     position: absolute;
-    opacity: 0;
+    opacity: 0.1;
     top: 0;
     left: 0;
     z-index: -2;
