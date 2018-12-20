@@ -19,7 +19,6 @@ padding: 15px;
 background-size: cover;
 background-repeat: no-repeat;
 border: 1px solid white;
-box-shadow: 1px 1px 8px rgba(0,0,0,0.5);
 transform: rotate(-15deg);
 clip-path: polygon(100% 0, 100% 50%, 50% 100%, 0 100%, 0 0);
 }
@@ -64,8 +63,6 @@ text-transform: uppercase;
 border: 1px solid #fff;
 
 }
-
-/* Todo: fixed video styles and video container so it looks good */
 
 #queen,
 #madona,

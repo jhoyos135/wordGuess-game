@@ -1,8 +1,4 @@
-//TODO: refactor with constructors and classes
-//TODO: Wins: (# of times user guessed the word correctly).
-//TODO: After the user wins/loses the game should automatically choose another word and make the user play it.
-
-const wordList = ["madona", "journey", "queen", "survivor"];
+let wordList = ["madonna", "journey", "queen", "survivor"];
 let choice = Math.floor(Math.random() * 4);
 let answer = wordList[choice];
 let Mylength = answer.length;
@@ -12,17 +8,17 @@ let attemptsLeft = 10;
 let output = "";
 let userLetter = "";
 let game = document.querySelector("#game");
-const btn_reload = document.querySelector('button');
+let btn_reload = document.querySelector('button');
 let input = document.querySelector("input");
 let h4 = document.querySelector('h4');
-var scores = 0;
+let scores = 0;
 
 //this creates the game container
-let setup = () => {
+const setup = () => {
 
     output = '';
     input.value= '';
-        for(choice in answer) {
+        for(let choice in answer) {
             display[choice] = "_ ";
             output = output + display[choice];
         }
@@ -30,7 +26,7 @@ let setup = () => {
         output = "";
 };
     
-let submit = () => {
+const submit = () => {
 
     let input = document.querySelector("input");
 
@@ -39,7 +35,7 @@ let submit = () => {
         input.value = "";
         h4.style.display = "none";
 
-        for(choice in answer) {
+        for(let choice in answer) {
 
             if( userLetter.toLowerCase() === letters[choice] ) {
 
@@ -50,7 +46,7 @@ let submit = () => {
             output = output + display[choice] + "";
 
         };
-        
+
         game.innerHTML = output;
         
         //checks to see that the letter is already used
@@ -64,6 +60,7 @@ let submit = () => {
     let guesses = document.querySelector("#guesses");
     let history = document.querySelector(".history");
 
+    //wins the game
     if(game.textContent.length === letters.length) {
 
         guesses.innerHTML = `
@@ -76,8 +73,9 @@ let submit = () => {
         // saves and prints the score of evey game played
         // plays the audio
         if(game.textContent === output) {
+
             audio();
-            scores++
+            scores++;
             localStorage.player_score = JSON.stringify(scores);
             
             let win = document.querySelector('.wins');
@@ -85,14 +83,14 @@ let submit = () => {
 
         };
 
+    // looses the game
     } else if (attemptsLeft < 1 ) {
 
         guesses.innerHTML = `
-            Sorry the right word was <strong class="strong">${answer} </strong>
+            Sorry the right word was <strong class="strong">${answer}</strong>
         `;
         game.classList.add('delete');
         history.classList.add('delete');
-
         
             let game_over = document.querySelector('#game-over');
     
@@ -100,29 +98,46 @@ let submit = () => {
             game_over.src = ("https://www.youtube.com/embed/6S21ZSsC21U?rel=0&autoplay=1&showinfo=0&iv_load_policy=3&controls=0");
             btn_reload.style.display = 'block';
 
-            
             localStorage.clear();
             
-            
     } else {
-        let count_box = `
-        color: red;
-        border: 1px solid white;
-        display: inline-block;
-        text-shadow: 0px 0px 5px #999;
-        padding: 0 10px;
-        background: #444;
-        box-sizing: border-box;
-        box-shadow: 1px 1px 5px red;
-        `
+        
+        if(attemptsLeft < 10) {
+            let count_box = `
+            color: blue;
+            border: 1px solid white;
+            display: inline-block;
+            text-shadow: 0px 0px 5px #999;
+            padding: 0 10px;
+            background: #666;
+            box-sizing: border-box;
+            box-shadow: 1px 1px 5px blue;
+            `
+    
+            guesses.innerHTML = `
+                You have <strong style="${count_box}""> ${attemptsLeft} </strong> guesses left
+            `;
+        }
+        if(attemptsLeft < 5) {
+            let count_box = `
+            color: red;
+            border: 1px solid white;
+            display: inline-block;
+            text-shadow: 0px 0px 5px #999;
+            padding: 0 10px;
+            background: #666;
+            box-sizing: border-box;
+            box-shadow: 1px 1px 5px red;
+            `
 
-        guesses.innerHTML = `
-            You have <strong style="${count_box}""> ${attemptsLeft} </strong> guesses left
-        `;
+            guesses.innerHTML = `
+                You have <strong style="${count_box}""> ${attemptsLeft} </strong> guesses left
+            `;
+        }
     }
 };
 
-let audio = () => {
+const audio = () => {
     
     if(game.textContent === "queen") {
         
@@ -140,7 +155,7 @@ let audio = () => {
         journey.src = ("https://www.youtube.com/embed/VXi1sc8kFuU?rel=0&autoplay=1&showinfo=0&controls=0");
 
     }
-    if(game.textContent === "madona") {
+    if(game.textContent === "madonna") {
     
         let madona = document.querySelector('#madona');
 
@@ -156,27 +171,25 @@ let audio = () => {
         survivor.src = ("https://www.youtube.com/embed/t3oh7ktTABM?rel=0&autoplay=1&showinfo=0&controls=0");
 
     }
-}
+};
 
 window.addEventListener('DOMContentLoaded', () => {
     
     setup();
    
     document.addEventListener('keydown', (e) => {
-        e.preventDefault();
         
-
         let input = document.querySelector('input');
-        let x = e.charCode || e.keyCode;
-        let y = String.fromCharCode(x).toLowerCase();
-        input.value = y  
+        let x = e.key.toLowerCase();
+        input.value = x;
     
 
         let history = document.querySelector(".history");
     
-        if(!display.includes(y) && e.which !== 8 && e.which !== 13  ) {
+        if(!display.includes(x) && e.which !== 8 && e.which !== 13  ) {
+
             history.innerHTML += `
-            <span> ${y} </span>
+            <span> ${x} </span>
             `;
             submit();
 
@@ -185,7 +198,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }); 
 
 //saves the score to the local storage
-if( localStorage["player_score"] !== undefined ){ 
+if( localStorage["player_score"] !== undefined ){
 
     scores = JSON.parse(localStorage["player_score"]);
 
@@ -193,7 +206,7 @@ if( localStorage["player_score"] !== undefined ){
 
 });
 
-let reload = () => {
+const reload = () => {
     location.reload();
     
 }
