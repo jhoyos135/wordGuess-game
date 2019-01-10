@@ -8,10 +8,13 @@ let attemptsLeft = 10;
 let output = "";
 let userLetter = "";
 let game = document.querySelector("#game");
-let btn_reload = document.querySelector('button');
+let btn_reload = document.querySelector('.reload');
+let btn_restart = document.querySelector('.restart');
 let input = document.querySelector("input");
 let h4 = document.querySelector('h4');
-let scores = 0;
+let win_score = 0;
+let loss_score = 0;
+let usedLetters = [];
 
 //this creates the game container
 const setup = () => {
@@ -28,7 +31,11 @@ const setup = () => {
     
 const submit = () => {
 
+    let win = document.querySelector('.wins');
+    let loss = document.querySelector('.losses');
     let input = document.querySelector("input");
+    let used = document.querySelector('.used').textContent;
+    used = Array.from(new Set(used.split(""))).toString();
 
         output = "";
         userLetter = input.value;
@@ -50,11 +57,15 @@ const submit = () => {
         game.innerHTML = output;
         
         //checks to see that the letter is already used
-        if(output.includes(userLetter.toLowerCase())) {
+        if(output.includes(userLetter.toLowerCase()) ) {
+    
             //TODO: SHOW A MESSAGE THAT SAYS "THE LETTER IS ALREADY ADDED"
+           
        } else {
+            
             output = '';
             attemptsLeft--;
+
         }    
 
     let guesses = document.querySelector("#guesses");
@@ -69,22 +80,24 @@ const submit = () => {
         game.classList.add('delete');
         history.classList.add('delete');
         btn_reload.style.display = 'block';
+        btn_restart.style.display = 'block';
 
         // saves and prints the score of evey game played
         // plays the audio
         if(game.textContent === output) {
 
             audio();
-            scores++;
-            localStorage.player_score = JSON.stringify(scores);
-            
-            let win = document.querySelector('.wins');
-            win.textContent = ` Your score is: ${scores} `
+            win_score++;
+            localStorage.win_player_score = JSON.stringify(win_score);            
+
+            win.textContent = ` Winning Score: ${win_score} `
+            loss.textContent = ` Lossing Score: ${loss_score} `
 
         };
 
     // looses the game
     } else if (attemptsLeft < 1 ) {
+
 
         guesses.innerHTML = `
             Sorry the right word was <strong class="strong">${answer}</strong>
@@ -92,13 +105,13 @@ const submit = () => {
         game.classList.add('delete');
         history.classList.add('delete');
         
-            let game_over = document.querySelector('#game-over');
+            // let game_over = document.querySelector('#game-over');
     
-            game_over.style.display = "block";
-            game_over.src = ("https://www.youtube.com/embed/6S21ZSsC21U?rel=0&autoplay=1&showinfo=0&iv_load_policy=3&controls=0");
+            // game_over.style.display = "block";
+            // game_over.src = ("https://www.youtube.com/embed/6S21ZSsC21U?rel=0&autoplay=1&showinfo=0&iv_load_policy=3&controls=0");
+            
             btn_reload.style.display = 'block';
-
-            localStorage.clear();
+            btn_restart.style.display = 'block';
             
     } else {
         
@@ -134,6 +147,13 @@ const submit = () => {
                 You have <strong style="${count_box}""> ${attemptsLeft} </strong> guesses left
             `;
         }
+    }
+
+    if(attemptsLeft === 0) {
+        loss_score++;
+        localStorage.lose_player_score = JSON.stringify(loss_score);
+        win.textContent = ` Winning Score: ${win_score} `
+        loss.textContent = ` Lossing Score: ${loss_score} `
     }
 };
 
@@ -182,14 +202,14 @@ window.addEventListener('DOMContentLoaded', () => {
         let input = document.querySelector('input');
         let x = e.key.toLowerCase();
         input.value = x;
+        usedLetters.push(x);
     
-
         let history = document.querySelector(".history");
     
         if(!display.includes(x) && e.which !== 8 && e.which !== 13  ) {
 
-            history.innerHTML += `
-            <span> ${x} </span>
+            history.innerHTML = `
+            <span class="used"> ${usedLetters.join("")} </span>
             `;
             submit();
 
@@ -198,9 +218,14 @@ window.addEventListener('DOMContentLoaded', () => {
     }); 
 
 //saves the score to the local storage
-if( localStorage["player_score"] !== undefined ){
+if( localStorage["win_player_score"] !== undefined ){
 
-    scores = JSON.parse(localStorage["player_score"]);
+    win_score = JSON.parse(localStorage["win_player_score"]);
+
+}
+if( localStorage["lose_player_score"] !== undefined ){
+
+    loss_score = JSON.parse(localStorage["lose_player_score"]);
 
 }
 
@@ -208,7 +233,10 @@ if( localStorage["player_score"] !== undefined ){
 
 const reload = () => {
     location.reload();
-    
+}
+const restart = () => {
+     localStorage.clear();
+     location.reload();
 }
 
 
