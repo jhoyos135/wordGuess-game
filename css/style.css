@@ -1,10 +1,10 @@
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: #333;
-    color: #fff;
-    overflow-x: hidden;
+margin: 0;
+padding: 0;
+height: 100vh;
+background: #333;
+overflow-x: hidden;
+color: white;
 }
 img {
 max-width: 100%;
@@ -13,13 +13,11 @@ height: 200px;
 position: relative;
 left: 0;
 overflow: hidden;
-margin: 30px 30px 30px -40px;
-margin-top: -30px;
 padding: 15px;
 background-size: cover;
 background-repeat: no-repeat;
 border: 1px solid white;
-transform: rotate(-15deg);
+transform: rotate(-10deg);
 clip-path: polygon(100% 0, 100% 50%, 50% 100%, 0 100%, 0 0);
 }
 
@@ -63,6 +61,11 @@ text-transform: uppercase;
 border: 1px solid #fff;
 
 }
+.strong span {
+    color: hotpink !important;
+    border-bottom: 2px solid white;
+    display: inline-block
+}
 
 #queen,
 #madona,
@@ -98,4 +101,26 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+#message {
+    color: white;
+  }
+
+.results {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    align-content: center;
+
+}
+
+.history {
+    margin: 25px auto;
+    height: 50px;
+}
+
+#wins,
+#losses {
+    font-size: 1.5em;
 }
