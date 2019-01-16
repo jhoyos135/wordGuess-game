@@ -1,4 +1,4 @@
-let wordsList = ["madonna", "journey", "queen", "survivor"];
+let wordsList = ["blue", "green", "red", "orange", "violet", "indigo", "yellow", 'pink', 'brown'];
 let chosenWord = "";
 let lettersInWord = [];
 let numBlanks = 0;
@@ -12,6 +12,7 @@ let message = document.querySelector('#message');
 let wrong_guess = document.querySelector("#wrong");
 let game = document.querySelector('#game');
 let guessesLeft = document.querySelector("#guesses");
+let body = document.querySelector('#game-over');
 
 
 
@@ -73,60 +74,28 @@ const checkLetters = (letter) => {
     wrongGuesses.push(letter);
     let final_word = [...new Set(wrongGuesses)];
     final_join = final_word.join("");
-    console.log(final_join);
+    // console.log(final_join);
 
     attemptsLeft--;
 
-    // queen.src= ('');
-    // journey.src= ('');
-    // madona.src= ('');
-    // survivor.src= ('');
+    // set background back to main color after new word is typed
+    body.style.background = '#333';
+    body.style.display = 'block';
 
   }
-
-  queen.src= ('');
-  journey.src= ('');
-  madona.src= ('');
-  survivor.src= ('');
 
 };
 
-const audio = () => {
+const color = () => {    
 
-  console.log(chosenWord)
-    
-  if(chosenWord == "queen") {
-      
-      let queen = document.querySelector('#queen');
-
-      queen.style.display = "block";
-      queen.src = ( "https://www.youtube.com/embed/1P2tT61hLLM?rel=0&autoplay=1&showinfo=0&controls=0");
-
+  if(chosenWord == game.textContent.replace(/\s/g,'') ) { 
+      body.style.background = `${chosenWord}`;
+      body.style.display = 'block';
+  } else {
+    body.style.background = '#333';
+    body.style.display = 'none';
   }
-  else if(chosenWord == "journey") {
   
-      let journey = document.querySelector('#journey');
-
-      journey.style.display = "block";
-      journey.src = ("https://www.youtube.com/embed/VXi1sc8kFuU?rel=0&autoplay=1&showinfo=0&controls=0");
-
-  }
-  else if(chosenWord == "madonna") {
-  
-      let madona = document.querySelector('#madona');
-
-      madona.style.display = "block";
-      madona.src = ("https://www.youtube.com/embed/6m9i3sYtONU?rel=0&autoplay=1&showinfo=0&controls=0");
-
-  }
-  else if(chosenWord == "survivor") {
-  
-      let survivor = document.querySelector('#survivor');
-
-      survivor.style.display = "block";
-      survivor.src = ("https://www.youtube.com/embed/t3oh7ktTABM?rel=0&autoplay=1&showinfo=0&controls=0");
-
-  }
 };
 
 const playGame = () => {
@@ -179,11 +148,11 @@ if(attemptsLeft < 5) {
 
     winScore++;
 
-    message.innerHTML = `<div class="strong"> Congratulations The right word is <span> ${chosenWord} </span> </div> `
+    message.innerHTML = `<div class="strong"> Congratulations The right color is <span> ${chosenWord} </span> </div> `
 
     document.querySelector("#wins").innerHTML = winScore;
 
-    audio();
+    color();
 
     setup();
 
@@ -192,7 +161,7 @@ if(attemptsLeft < 5) {
 
     lossScore++;
 
-    message.innerHTML = ` <div class="strong"> Sorry The right word was <span> ${chosenWord} </span> </div> `
+    message.innerHTML = ` <div class="strong"> Sorry The right color was <span> ${chosenWord} </span> </div> `
 
     document.querySelector("#losses").innerHTML = lossScore;
 
